@@ -16,18 +16,34 @@
 
 
 <script>
+/* Event listener */
+document.getElementsByName("input_url")[0].addEventListener('change', SaveInput);
+
+/* Function */
+function SaveInput(){
+
+  // Store
+  localStorage.setItem("input_url_text", this.value);
+
+  // Log change
+  console.log(localStorage.getItem("input_url_text"));
+}
+
 // Check browser support
 if (typeof(Storage) !== "undefined") {
   // Saving mechanism exists
   console.log("Saving possible.");
 
-  // Store
-  localStorage.setItem("input_url_text", "some random input");
-  
+  // // Store
+  // localStorage.setItem("input_url_text", "some random input");
+  // // Retrieve
+  // var input_url_text = localStorage.getItem("input_url_text");
+  // document.getElementById("input_url").value = input_url_text;
+  // console.log(input_url_text);
+
   // Retrieve
-  var input_url_text = localStorage.getItem("input_url_text");  
-  document.getElementById("input_url").value = input_url_text;
-  console.log(input_url_text);
+  document.getElementById("input_url").value = localStorage.getItem("input_url_text");
+
 } else {
   // Saving mechanism exists
   console.log("Saving possible.");  
