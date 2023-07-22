@@ -23,7 +23,7 @@ type Student struct {
 	Processed string
 }
 
-func main() {
+func main2() {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
@@ -55,6 +55,7 @@ func main() {
 			// td := TemplateData{Raw: "abc", Processed: "ABC"}
 			td := Student{Raw: 1, Processed: "ABC"}
 			tmpl.Execute(w, td)
+			log.Println("haha")
 			// log.Println(dat)
 		}
 	})
@@ -85,16 +86,16 @@ func main() {
 	http.ListenAndServe(portNumber, r)
 }
 
-// func indexHTMLTemplateVariableHandler(response http.ResponseWriter, request *http.Request) {
-// 	var tmpl_target = "./templates/random.tmpl"
-// 	tmplt := template.New(tmpl_target)       //create a new template with some name
-// 	tmplt, _ = tmplt.ParseFiles(tmpl_target) //parse some content and generate a template, which is an internal representation
-// 	p := Student{Raw: 1, Processed: "Aisha"} //define an instance with required field
-// 	tmplt.Execute(response, p)               //merge template ‘t’ with content of ‘p’
-// }
+func indexHTMLTemplateVariableHandler(response http.ResponseWriter, request *http.Request) {
+	var tmpl_target = "./templates/random.tmpl"
+	tmplt := template.New(tmpl_target)       //create a new template with some name
+	tmplt, _ = tmplt.ParseFiles(tmpl_target) //parse some content and generate a template, which is an internal representation
+	p := Student{Raw: 1, Processed: "Aisha"} //define an instance with required field
+	tmplt.Execute(response, p)               //merge template ‘t’ with content of ‘p’
+}
 
-// func main() {
-// 	fmt.Println("Starting Server for Templated response from file")
-// 	http.HandleFunc("/", indexHTMLTemplateVariableHandler)
-// 	http.ListenAndServe(portNumber, nil)
-// }
+func main() {
+	fmt.Println("Starting Server for Templated response from file")
+	http.HandleFunc("/", indexHTMLTemplateVariableHandler)
+	http.ListenAndServe(portNumber, nil)
+}
