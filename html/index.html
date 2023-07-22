@@ -2,17 +2,36 @@
 <html>
 <body>
 
-<div id="result"></div>
+<h1>The form method="get" attribute</h1>
+
+<form action="/action_page.php" method="get" target="_blank">
+  <label for="fname">URL:</label>
+  <input type="text" id="input_url" name="input_url"><br><br>
+  
+  <input type="submit" value="Submit">
+</form>
+
+<p>Submit if ready</p>
+
+
 
 <script>
 // Check browser support
 if (typeof(Storage) !== "undefined") {
-	// Store
-	localStorage.setItem("lastname", "Smith");
-	// Retrieve
-	document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+  // Saving mechanism exists
+  console.log("Saving possible.");
+
+  // Store
+  localStorage.setItem("input_url_text", "some random input");
+  
+  // Retrieve
+  var input_url_text = localStorage.getItem("input_url_text");  
+  document.getElementById("input_url").value = input_url_text;
+  console.log(input_url_text);
 } else {
-	document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+  // Saving mechanism exists
+  console.log("Saving possible.");  
+  document.getElementById("input_url").innerHTML = "Sorry, your browser does not support Web Storage...";
 }
 </script>
 
