@@ -6,14 +6,21 @@ import (
 	"net/http"
 )
 
+const portNumber = ":8080"
+
+type TemplateData struct {
+	Raw       string
+	Processed string
+}
+
 func main() {
 	http.HandleFunc("/", WelcomeHandler)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(portNumber, nil)
 }
 
 type User struct {
 	Name        string
-	Nationality string //unexported field.
+	Nationality string
 }
 
 func check(err error) {
@@ -24,16 +31,22 @@ func check(err error) {
 
 func WelcomeHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
-		t, err := template.ParseFiles("welcomeform.html")
+		t, err := template.ParseFiles("index.tmpl")
 		check(err)
 		t.Execute(w, nil)
+		log.Println("GET response")
 	} else {
 		r.ParseForm()
-		myUser := User{}
-		myUser.Name = r.Form.Get("entered_name")
-		myUser.Nationality = r.Form.Get("entered_nationality")
-		t, err := template.ParseFiles("welcomeresponse.html")
+		// myUser := User{}
+		// myUser.Raw = r.Form.Get("entered_name")
+		// myUser.Processed = r.Form.Get("entered_nationality")
+		td := TemplateData{}
+		td.Raw = "temp1"
+		td.Processed = "temp2"
+
+		t, err := template.ParseFiles("index.tmpl")
 		check(err)
-		t.Execute(w, myUser)
+		t.Execute(w, td)
+		log.Println("POST response")
 	}
 }

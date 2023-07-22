@@ -1,3 +1,4 @@
+{{define "index"}}
 <!DOCTYPE html>
 <html>
 <body>
@@ -15,13 +16,13 @@
 <p></p>
 <label for="output_raw">Output Raw:</label>
 <br>
-<textarea id="output_raw" name="output_raw" rows="12" cols="50">{{.Raw}}</textarea>
+<textarea id="output_raw" name="output_raw" rows="12" cols="50"></textarea>
 <br/>
 
 <p></p>
 <label for="output_processed">Output Processed:</label>
 <br>
-<textarea id="output_processed" name="output_processed" rows="12" cols="50">{{.Processed}}</textarea>
+<textarea id="output_processed" name="output_processed" rows="12" cols="50"></textarea>
 <br/>
 
 
@@ -59,3 +60,4 @@ if (typeof(Storage) !== "undefined") {
 
 </body>
 </html>
+{{end}}
