@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>The form method="POST" attribute</h1>
+
+<form action="/action_page.php" method="POST" target="_blank">
+  <label for="input_url">URL:</label>
+  <br>
+  <textarea id="input_url" name="input_url" rows="4" cols="50"></textarea>
+  <br/>
+  <input type="submit" value="Submit">
+</form>
+
+<p></p>
+<label for="output_raw">Output Raw:</label>
+<br>
+<textarea id="output_raw" name="output_raw" rows="12" cols="50"></textarea>
+<br/>
+
+<p></p>
+<label for="output_processed">Output Processed:</label>
+<br>
+<textarea id="output_processed" name="output_processed" rows="12" cols="50"></textarea>
+<br/>
+
+
+
+
+
+<script>
+/* Event listener */
+document.getElementsByName("input_url")[0].addEventListener('change', SaveInput);
+
+/* Function */
+function SaveInput(){
+
+  // Store
+  localStorage.setItem("input_url_text", this.value);
+
+  // Log change
+  console.log(localStorage.getItem("input_url_text"));
+}
+
+// Check browser support
+if (typeof(Storage) !== "undefined") {
+  // Saving mechanism exists
+  console.log("Saving possible.");
+
+  // Retrieve
+  document.getElementById("input_url").value = localStorage.getItem("input_url_text");
+
+} else {
+  // Saving mechanism exists
+  console.log("Saving possible.");  
+  document.getElementById("input_url").innerHTML = "Sorry, your browser does not support Web Storage...";
+}
+</script>
+
+</body>
+</html>
