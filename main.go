@@ -39,13 +39,15 @@ func main() {
 		log.Println("page for POST")
 
 		// Acquire response from target URL
-		var url_dest = "https://developers.onemap.sg/commonapi/search?searchVal=revenue&returnGeom=n&getAddrDetails=n&pageNum=1"
-		resp, err := http.Get(url_dest)
+		// var input_url = "https://developers.onemap.sg/commonapi/search?searchVal=revenue&returnGeom=n&getAddrDetails=n&pageNum=1"
+		r.ParseForm()
+		var input_url = r.Form.Get("input_url")
+		resp, err := http.Get(input_url)
 		if err != nil {
-			log.Printf("Error querying: %v\n", url_dest)
+			log.Printf("Error querying: %v\n", input_url)
 			log.Fatalln(err)
 		} else {
-			fmt.Printf("Querying: %v\n", url_dest)
+			fmt.Printf("Querying: %v\n", input_url)
 			// Use the html package to parse the response body from the request
 			resp_body, err := ioutil.ReadAll(resp.Body)
 			resp_body_str := string(resp_body)
